@@ -14,23 +14,27 @@
 
 <script>
   import {onMount} from 'svelte';
+  import { List, ListItem, Icon } from 'svelte-materialify/src';
+  import Button from 'svelte-materialify/src/components/Button';
+  import { goto } from '@sapper/app';
   export let todos;
-  onMount(() => {
-    console.log('todos: ', todos);
-  })
-  console.log('jobs');
+  onMount()
+
+  async function goToCreate (e) {
+    await goto('jobs/create');
+  }
 </script>
 
 <style></style>
 
-<h1>Recent Jobs</h1>
+<h1>Recent Todos</h1>
 
 <h2>
   {#each todos as todo}
-    <ul>
-      <li> { todo.todo }</li>
-    </ul>
+    <List>
+      <ListItem>{ todo.todo }</ListItem>
+    </List>
   {/each}
 </h2>
 
-<a href="jobs/create">Post a new job</a>
+<Button  class="primary-color" on:click={ () => goto('jobs/create') }>Post a new job</Button>
